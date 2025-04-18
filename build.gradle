@@ -21,10 +21,11 @@ configurations {
 
 repositories {
 	mavenCentral()
-}
+	}
+
 
 ext {
-	set('springAiVersion', "1.0.0-M7")
+	set('springAiVersion', "1.0.0-M6") //M7 은 ai 의존성을 찾지 못함
 }
 
 dependencies {

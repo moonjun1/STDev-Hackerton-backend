@@ -1,5 +1,6 @@
 package com.stdev.team10.domain.chemical.dto;
 
+import com.stdev.team10.domain.chemical.entity.ChemicalEntity;
 import lombok.Getter;
 import lombok.Setter;
 

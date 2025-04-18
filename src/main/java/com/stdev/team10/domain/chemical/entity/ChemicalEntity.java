@@ -28,6 +28,6 @@ public class ChemicalEntity {
     private String chemicalDescriptionKo;
 
     // "초등", "중등", "고등", "기타" 값 가질수 있음
-    @Column(length = 10)
+    @Column(length = 100)
     private String educationLevel;
 }
