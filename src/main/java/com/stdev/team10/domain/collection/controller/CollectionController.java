@@ -24,7 +24,7 @@ public class CollectionController {
         return collectionService.chemicalFindAll();
     }
 
-    @Operation(summary = "화학식으로 특정 물질 정보 조회 api", description = "화학식으로 특정 물질 정ㅎ보를 도감에서 조회합니다.")
+    @Operation(summary = "화학식으로 특정 물질 정보 조회 api", description = "화학식으로 특정 물질 정보를 도감에서 조회합니다.")
     @GetMapping("/find/{molecularFormula}")
     public ResponseEntity<?> chemicalFindByMolecularFormula(@PathVariable String molecularFormula) {
         return collectionService.chemicalFindByMolecularFormula(molecularFormula);
