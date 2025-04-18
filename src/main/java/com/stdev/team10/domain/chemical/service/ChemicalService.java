@@ -17,34 +17,6 @@ public class ChemicalService {
     @Autowired
     private ChemicalRepository chemicalRepository;
 
-    public ResponseEntity<?> chemicalFindAll(){
-        try {
-            List<ChemicalEntity> chemicalEntityList = chemicalRepository.findAll();
-            if(chemicalEntityList.isEmpty()) {
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK, "화학물질이 없습니다.", null));
-            } else {
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK, "화학물질 조회 성공", chemicalEntityList));
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR, "화학물질 조회 실패", null));
-        }
 
-    }
-
-    public ResponseEntity chemicalFindByMolecularFormula(String molecularFormula) {
-        try{
-            if(!chemicalRepository.existsByMolecularFormulaIgnoreCase(molecularFormula)) {
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK, "화학물질이 없습니다.", null));
-            } else {
-                ChemicalEntity chemicalEntity = chemicalRepository.findByMolecularFormulaIgnoreCase(molecularFormula);
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK, "화학물질 조회 성공", chemicalEntity));
-            }
-        } catch (Exception e) {
-            log.error(e.getMessage());
-            return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR, "화학물질 조회 실패", null));
-        }
-
-    }
 
 }
