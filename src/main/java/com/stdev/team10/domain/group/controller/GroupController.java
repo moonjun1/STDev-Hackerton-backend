@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/group")
-@Tag(name = "그룹 관련 api입니다", description = "국내 초,중,고 이름을 조회할 수 있습니다.")
+@Tag(name = "그룹 관련 api입니다", description = "국내 초,중,고 이을 조회할 수 있습니다.")
 public class GroupController {
 
     @Autowired
