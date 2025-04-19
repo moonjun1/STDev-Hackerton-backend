@@ -132,7 +132,7 @@ public class ChemicalFormulaService {
         }
     }
 
-    // ChemicalEntity를 ChemicalDto로 변환
+    // ChemicalFormulaService.java의 convertToDto 메서드 수정
     private ChemicalDto convertToDto(ChemicalEntity entity) {
         ChemicalDto dto = new ChemicalDto();
         dto.setChemicalId(entity.getChemicalId());
@@ -141,6 +141,7 @@ public class ChemicalFormulaService {
         dto.setMolecularFormula(entity.getMolecularFormula());
         dto.setChemicalDescriptionKo(entity.getChemicalDescriptionKo());
         dto.setEducationLevel(entity.getEducationLevel());
+        dto.setAttackPower(entity.getAttackPower());
         return dto;
     }
 
