@@ -13,15 +13,19 @@ public class UserDto {
     private Long userId;
 
     @Schema(example = "홍길동")
-    private String username;
+    private String userName;
 
     @Schema(example = "상경중학교")
     private String groupName;
 
+    @Schema(hidden = true)
+    private Long userPoint;
+
     public UserEntity toEntity() {
         return UserEntity.builder()
-                .username(this.username)
-                .organization(this.groupName)
+                .userName(this.userName)
+                .groupName(this.groupName)
+                .userPoint(this.userPoint)
                 .build();
     }
 }

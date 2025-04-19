@@ -19,10 +19,11 @@ public class UserService {
 
     public ResponseEntity<?> registerUser(UserDto userDto) {
         try {
-            if(userRepository.existsByUsername(userDto.getUsername())) {
+            if(userRepository.existsByUserName(userDto.getUserName())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(ResponseDto.response(HttpStatus.BAD_REQUEST, "이미 존재하는 사용자 이름입니다.", null));
             } else {
+                userDto.setUserPoint(0L); // 초기 포인트 설정
                 UserEntity userEntity = userRepository.save(userDto.toEntity());
                 return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK, "사용자 정보 저장 성공", userEntity));
             }

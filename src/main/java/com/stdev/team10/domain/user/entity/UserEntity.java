@@ -17,10 +17,13 @@ public class UserEntity {
     private Long userId;
 
     @Column(length = 255)
-    private String username;
+    private String userName;
 
     @Column(length = 255)
-    private String organization;
+    private String groupName;
+
+    @Column(length = 255)
+    private Long userPoint;
 
 
 }

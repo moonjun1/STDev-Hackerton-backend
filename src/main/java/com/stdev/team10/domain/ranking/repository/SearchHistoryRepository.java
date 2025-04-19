@@ -16,10 +16,10 @@ public interface SearchHistoryRepository extends JpaRepository<FormulaSearchHist
     long countDistinctSuccessfulFormulasByUser(@Param("user") UserEntity user);
 
     // 특정 조직의 사용자들이 성공한 검색 횟수 조회 (중복 제외)
-    @Query("SELECT u.organization, COUNT(DISTINCT CONCAT(h.user.id, '-', h.matchedFormula)) " +
+    @Query("SELECT u.groupName, COUNT(DISTINCT CONCAT(h.user.id, '-', h.matchedFormula)) " +
             "FROM FormulaSearchHistory h JOIN h.user u " +
-            "WHERE h.successful = true GROUP BY u.organization ORDER BY COUNT(DISTINCT CONCAT(h.user.id, '-', h.matchedFormula)) DESC")
-    List<Object[]> countDistinctSuccessfulSearchesByOrganization();
+            "WHERE h.successful = true GROUP BY u.groupName ORDER BY COUNT(DISTINCT CONCAT(h.user.id, '-', h.matchedFormula)) DESC")
+    List<Object[]> countDistinctSuccessfulSearchesByGroupName();
 
     // 사용자별 성공한 검색 횟수 조회 (중복 제외)
     @Query("SELECT h.user, COUNT(DISTINCT h.matchedFormula) FROM FormulaSearchHistory h " +

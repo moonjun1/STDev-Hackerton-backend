@@ -60,8 +60,8 @@ public class RankingService {
             RankingDtos.UserRankingDto rankingDto = RankingDtos.UserRankingDto.builder()
                     .rank(rank++)
                     .userId(user.getUserId())
-                    .username(user.getUsername())
-                    .organization(user.getOrganization())
+                    .username(user.getUserName())
+                    .organization(user.getGroupName())
                     .successCount(count) // 중복 제외된 성공 카운트
                     .build();
 
@@ -78,7 +78,7 @@ public class RankingService {
      */
     private List<RankingDtos.OrganizationRankingDto> getTopOrganizationRankings(int limit) {
         // 중복 화학식 제외한 조직별 검색 성공 횟수 조회
-        List<Object[]> results = searchHistoryRepository.countDistinctSuccessfulSearchesByOrganization();
+        List<Object[]> results = searchHistoryRepository.countDistinctSuccessfulSearchesByGroupName();
         List<RankingDtos.OrganizationRankingDto> organizationRankings = new ArrayList<>();
 
         int rank = 1;

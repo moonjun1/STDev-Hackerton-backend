@@ -380,7 +380,7 @@ public class TitleService {
                 .build();
 
         userTitleRepository.save(userTitle);
-        System.out.println("사용자 " + user.getUsername() + "에게 칭호 '" + titleName + "' 부여됨");
+        System.out.println("사용자 " + user.getUserName() + "에게 칭호 '" + titleName + "' 부여됨");
     }
 
     /**
