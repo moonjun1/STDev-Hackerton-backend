@@ -16,7 +16,4 @@ import java.util.List;
 public class ChemicalService {
     @Autowired
     private ChemicalRepository chemicalRepository;
-
-
-
 }
