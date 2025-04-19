@@ -6,6 +6,7 @@ import com.stdev.team10.domain.title.service.TitleService;
 import com.stdev.team10.domain.user.entity.UserEntity;
 import com.stdev.team10.domain.user.repository.UserRepository;
 import com.stdev.team10.global.common.response.ResponseDto;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,7 @@ public class AiTitleController {
     /**
      * AI가 생성한 맞춤형 칭호 목록 조회
      */
+    @Operation(summary = "ai 칭호를 반환", description = "사용자가 지금까지 조합한 화합을을 토대로 칭호를 생성합니다")
     @GetMapping("/{userId}")
     public ResponseEntity<?> getAiGeneratedTitles(@PathVariable Long userId) {
         try {
@@ -56,6 +58,7 @@ public class AiTitleController {
     /**
      * AI가 생성한 칭호를 사용자의 칭호로 저장
      */
+    @Operation(summary = "AI가 생성한 칭호를 사용자의 칭호로 저장", description = "사용자의 칭호로 넣고싶을떄 사용하시면 됩니다")
     @PostMapping("/{userId}/save")
     public ResponseEntity<?> saveAiGeneratedTitle(
             @PathVariable Long userId,

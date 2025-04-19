@@ -3,6 +3,7 @@ package com.stdev.team10.domain.report.controller;
 import com.stdev.team10.domain.report.dto.UserReportDto;
 import com.stdev.team10.domain.report.service.UserReportService;
 import com.stdev.team10.global.common.response.ResponseDto;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class UserReportController {
     /**
      * 사용자의 화학 활동 분석 보고서 생성
      */
+    @Operation(summary = "사용자의 화학 활동 분석 보고서 생성", description = "유저 id만 넣으면 됩니다")
     @GetMapping("/{userId}")
     public ResponseEntity<?> generateUserReport(@PathVariable Long userId) {
         try {
