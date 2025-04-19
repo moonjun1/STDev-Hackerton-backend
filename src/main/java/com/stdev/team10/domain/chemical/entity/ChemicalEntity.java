@@ -30,4 +30,9 @@ public class ChemicalEntity {
     // "초등", "중등", "고등", "기타" 값 가질수 있음
     @Column(length = 100)
     private String educationLevel;
+
+    // 공격력 필드 추가 (1~100)
+    @Column
+    private Integer attackPower;
+
 }

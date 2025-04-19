@@ -19,6 +19,8 @@ public class ChemicalDto {
 
     private String educationLevel;
 
+    private Integer attackPower;
+
     public ChemicalEntity toEntity() {
         return ChemicalEntity.builder()
                 .chemicalId(this.chemicalId)
@@ -27,6 +29,7 @@ public class ChemicalDto {
                 .molecularFormula(this.molecularFormula)
                 .chemicalDescriptionKo(this.chemicalDescriptionKo)
                 .educationLevel(this.educationLevel)
+                .attackPower(this.attackPower)
                 .build();
     }
 }
