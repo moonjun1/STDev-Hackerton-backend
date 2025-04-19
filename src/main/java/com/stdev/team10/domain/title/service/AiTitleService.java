@@ -48,7 +48,7 @@ public class AiTitleService {
         }
 
         // ChatGPT API 호출을 위한 프롬프트 생성
-        String prompt = createPrompt(user.getUsername(), discoveredFormulas);
+        String prompt = createPrompt(user.getUserName(), discoveredFormulas);
 
         // API 호출
         HttpHeaders headers = new HttpHeaders();

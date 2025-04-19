@@ -75,8 +75,8 @@ public class UserReportService {
         // 보고서 DTO 생성
         return UserReportDto.builder()
                 .userId(user.getUserId())
-                .username(user.getUsername())
-                .organization(user.getOrganization())
+                .username(user.getUserName())
+                .organization(user.getGroupName())
                 .generatedAt(LocalDateTime.now())
                 .reportContent(reportContent)
                 .build();
@@ -92,8 +92,8 @@ public class UserReportService {
 
         // 기본 사용자 정보
         userData.put("userId", user.getUserId());
-        userData.put("username", user.getUsername());
-        userData.put("organization", user.getOrganization());
+        userData.put("username", user.getUserName());
+        userData.put("organization", user.getGroupName());
 
         // 발견한 화학물질 정보
         List<String> discoveredFormulas = searchHistories.stream()

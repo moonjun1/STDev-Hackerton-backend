@@ -33,8 +33,42 @@ public class UserService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR, "사용자 정보 저장 실패: " + e.getMessage(), null));
         }
-
-
-
     }
+
+    public ResponseEntity<?> getUsernameById(Long userId) {
+        try {
+            if(userRepository.existsById(userId)){
+                UserEntity userEntity = userRepository.findById(userId).orElse(null);
+                return ResponseEntity.ok()
+                        .body(ResponseDto.response(HttpStatus.OK, "사용자 이름 조회 성공", userEntity.getUserName()));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(ResponseDto.response(HttpStatus.BAD_REQUEST, "유저가 존재하지 않습니다.", null));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR, "사용자 이름 조회 실패", null));
+        }
+    }
+
+
+    public ResponseEntity<?> getIdByUsername(String userName) {
+        try {
+            if(userRepository.existsByUserName(userName)){
+                UserEntity userEntity = userRepository.findByUserName(userName);
+                return ResponseEntity.ok()
+                        .body(ResponseDto.response(HttpStatus.OK, "사용자 id 조회 성공", userEntity.getUserId()));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(ResponseDto.response(HttpStatus.BAD_REQUEST, "유저가 존재하지 않습니다.", null));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR, "사용자 id 조회 실패", null));
+        }
+    }
+
+
 }
