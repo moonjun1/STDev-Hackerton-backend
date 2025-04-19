@@ -3,6 +3,7 @@ package com.stdev.team10.domain.title.service;
 import com.stdev.team10.domain.chemical.repository.ChemicalRepository;
 import com.stdev.team10.domain.ranking.entity.FormulaSearchHistory;
 import com.stdev.team10.domain.ranking.repository.SearchHistoryRepository;
+import com.stdev.team10.domain.title.dto.AiTitleDto;
 import com.stdev.team10.domain.title.dto.TitleDto;
 import com.stdev.team10.domain.title.entity.TitleEntity;
 import com.stdev.team10.domain.title.entity.UserTitleEntity;
@@ -448,5 +449,55 @@ public class TitleService {
 
         titleRepository.saveAll(defaultTitles);
         System.out.println("기본 칭호 초기화 완료");
+    }
+    /**
+     * AI가 생성한 칭호를 사용자의 칭호로 저장
+     */
+    @Transactional
+    public ResponseEntity<?> saveAiGeneratedTitle(Long userId, AiTitleDto aiTitleDto) {
+        try {
+            // 사용자 조회
+            Optional<UserEntity> userOptional = userRepository.findById(userId);
+            if (!userOptional.isPresent()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(ResponseDto.response(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다.", null));
+            }
+
+            UserEntity user = userOptional.get();
+
+            // 이미 같은 이름의 칭호가 있는지 확인
+            Optional<TitleEntity> existingTitle = titleRepository.findByTitleName(aiTitleDto.getTitleName());
+            TitleEntity title;
+
+            if (existingTitle.isPresent()) {
+                title = existingTitle.get();
+            } else {
+                // 새 칭호 생성
+                title = TitleEntity.builder()
+                        .titleName(aiTitleDto.getTitleName())
+                        .description(aiTitleDto.getDescription())
+                        .unlockCondition(aiTitleDto.getUnlockCondition())
+                        .build();
+                title = titleRepository.save(title);
+            }
+
+            // 사용자에게 칭호 부여
+            if (!userTitleRepository.existsByUserAndTitle(user, title)) {
+                UserTitleEntity userTitle = UserTitleEntity.builder()
+                        .user(user)
+                        .title(title)
+                        .acquiredAt(LocalDateTime.now())
+                        .isActive(false)
+                        .build();
+
+                userTitleRepository.save(userTitle);
+            }
+
+            return ResponseEntity.ok()
+                    .body(ResponseDto.response(HttpStatus.OK, "AI 칭호 저장 성공", null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR, "AI 칭호 저장 실패: " + e.getMessage(), null));
+        }
     }
 }
