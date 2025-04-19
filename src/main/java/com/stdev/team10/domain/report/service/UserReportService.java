@@ -179,9 +179,6 @@ public class UserReportService {
         return userData;
     }
 
-    /**
-     * ChatGPT API를 사용하여 보고서 생성
-     */
     private String generateReportWithAI(Map<String, Object> userData) {
         // API 요청을 위한 프롬프트 생성
         String prompt = createReportPrompt(userData);
@@ -194,7 +191,7 @@ public class UserReportService {
         Map<String, Object> requestBody = Map.of(
                 "model", "gpt-4",
                 "messages", List.of(
-                        Map.of("role", "system", "content", "당신은 화학 교육 전문가로, 사용자의 화학물질 발견 기록을 분석하여 객관적이고 교육적인 보고서를 작성합니다."),
+                        Map.of("role", "system", "content", "당신은 화학 교육 전문가로, 사용자의 화학물질 발견 기록을 분석하여 객관적이고 교육적인 보고서를 작성합니다. 응답은 반드시 마크다운 형식으로 작성하며, 보고서 형태를 유지합니다."),
                         Map.of("role", "user", "content", prompt)
                 ),
                 "temperature", 0.7
@@ -204,7 +201,14 @@ public class UserReportService {
 
         // API 응답 처리
         Map<String, Object> response = restTemplate.postForObject(apiUrl, request, Map.class);
-        return extractResponseContent(response);
+        String markdownContent = extractResponseContent(response);
+
+        // 반환 전에 마크다운 형식이 올바른지 확인
+        if (!markdownContent.startsWith("#")) {
+            markdownContent = "# " + userData.get("username") + "님의 화학 활동 분석 보고서\n\n" + markdownContent;
+        }
+
+        return markdownContent;
     }
 
     /**
