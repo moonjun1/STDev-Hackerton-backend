@@ -1,4 +1,4 @@
-package com.STDev.team10.domain.chemical.dto;
+package com.stdev.team10.domain.chemical.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

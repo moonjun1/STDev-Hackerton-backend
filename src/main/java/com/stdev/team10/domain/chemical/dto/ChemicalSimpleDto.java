@@ -1,4 +1,4 @@
-package com.STDev.team10.domain.chemical.dto;
+package com.stdev.team10.domain.chemical.dto;
 
 import lombok.Getter;
 import lombok.Setter;

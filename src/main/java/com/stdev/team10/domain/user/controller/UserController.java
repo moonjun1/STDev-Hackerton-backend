@@ -20,6 +20,6 @@ public class UserController {
     @PostMapping("/register")
     @Tag(name = "로그인 할떄", description = "이름이랑 ,조직 넣으시면 됩니다")
     public ResponseEntity<?> registerUser(@RequestBody UserDto userDto) {
-        return userService.saveUser(userDto);
+        return userService.registerUser(userDto);
     }
 }

@@ -1,7 +1,7 @@
-package com.STDev.team10.domain.chemical.controller;
+package com.stdev.team10.domain.chemical.controller;
 
-import com.STDev.team10.domain.chemical.dto.ChemicalFormulaDto;
-import com.STDev.team10.domain.chemical.service.ChemicalFormulaService;
+import com.stdev.team10.domain.chemical.dto.ChemicalFormulaDto;
+import com.stdev.team10.domain.chemical.service.ChemicalFormulaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

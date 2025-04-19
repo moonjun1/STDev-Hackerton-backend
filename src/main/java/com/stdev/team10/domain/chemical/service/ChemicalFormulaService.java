@@ -1,16 +1,17 @@
-package com.STDev.team10.domain.chemical.service;
+package com.stdev.team10.domain.chemical.service;
 
-import com.STDev.team10.domain.chemical.dto.ChemicalDto;
-import com.STDev.team10.domain.chemical.dto.ChemicalFormulaDto;
-import com.STDev.team10.domain.chemical.dto.ChemicalSearchResponseDto;
-import com.STDev.team10.domain.chemical.entity.ChemicalEntity;
-import com.STDev.team10.domain.chemical.repository.ChemicalRepository;
-import com.STDev.team10.domain.ranking.entity.FormulaSearchHistory;
-import com.STDev.team10.domain.ranking.repository.SearchHistoryRepository;
-import com.STDev.team10.domain.title.service.TitleService;
-import com.STDev.team10.domain.user.entity.UserEntity;
-import com.STDev.team10.domain.user.repository.UserRepository;
-import com.STDev.team10.global.common.response.ResponseDto;
+
+import com.stdev.team10.domain.chemical.dto.ChemicalDto;
+import com.stdev.team10.domain.chemical.dto.ChemicalFormulaDto;
+import com.stdev.team10.domain.chemical.dto.ChemicalSearchResponseDto;
+import com.stdev.team10.domain.chemical.entity.ChemicalEntity;
+import com.stdev.team10.domain.chemical.repository.ChemicalRepository;
+import com.stdev.team10.domain.ranking.entity.FormulaSearchHistory;
+import com.stdev.team10.domain.ranking.repository.SearchHistoryRepository;
+import com.stdev.team10.domain.title.service.TitleService;
+import com.stdev.team10.domain.user.entity.UserEntity;
+import com.stdev.team10.domain.user.repository.UserRepository;
+import com.stdev.team10.global.common.response.ResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -106,7 +107,9 @@ public class ChemicalFormulaService {
                         .build();
                 searchHistoryRepository.save(searchHistory);
 
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.NOT_FOUND,
+                return ResponseEntity
+                        .status(HttpStatus.NOT_FOUND)
+                        .body(ResponseDto.response(HttpStatus.NOT_FOUND,
                         "해당 원소 조합으로 화학 물질을 찾을 수 없습니다: " + standardFormula, null));
             }
         } catch (Exception e) {
