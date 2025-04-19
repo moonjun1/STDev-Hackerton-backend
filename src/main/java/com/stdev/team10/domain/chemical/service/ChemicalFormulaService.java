@@ -37,17 +37,17 @@ public class ChemicalFormulaService {
     /**
      * 화학식을 검색하는 메서드 (사용자 ID를 제공하는 경우)
      */
-    public ResponseEntity<?> searchChemicalByFormula(ChemicalFormulaDto formulaDto, Long userId) {
+    public ResponseEntity<?> searchChemicalByFormula(ChemicalFormulaDto formulaDto) {
         String input = formulaDto.getFormula().toLowerCase();
-
+        UserEntity user = null;
         // 사용자 조회
-        Optional<UserEntity> userOptional = userRepository.findById(userId);
-        if (!userOptional.isPresent()) {
+        if (!userRepository.existsByUserName(formulaDto.getUserName())) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(ResponseDto.response(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다.", null));
+                    .body(ResponseDto.response(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다.", false));
+        } else {
+            user = userRepository.findByUserName(formulaDto.getUserName());
         }
 
-        UserEntity user = userOptional.get();
 
         // "h + h + o" 패턴을 파싱하여 원소별 개수 계산
         Map<String, Integer> elementCountMap = parseElementsFromInput(input);
@@ -110,7 +110,7 @@ public class ChemicalFormulaService {
                 return ResponseEntity
                         .status(HttpStatus.NOT_FOUND)
                         .body(ResponseDto.response(HttpStatus.NOT_FOUND,
-                        "해당 원소 조합으로 화학 물질을 찾을 수 없습니다: " + standardFormula, null));
+                        "해당 원소 조합으로 화학 물질을 찾을 수 없습니다: " + standardFormula, false));
             }
         } catch (Exception e) {
             // 오류 발생 시 검색 실패 이력 저장
@@ -123,54 +123,7 @@ public class ChemicalFormulaService {
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR,
-                            "화학 물질 검색 실패: " + e.getMessage(), null));
-        }
-    }
-
-    /**
-     * 화학식을 검색하는 메서드 (익명 사용자용)
-     */
-    public ResponseEntity<?> searchChemicalByFormula(ChemicalFormulaDto formulaDto) {
-        String input = formulaDto.getFormula().toLowerCase();
-
-        // "h + h + o" 패턴을 파싱하여 원소별 개수 계산
-        Map<String, Integer> elementCountMap = parseElementsFromInput(input);
-
-        // 가능한 모든 화학식 조합 생성
-        List<String> possibleFormulas = generateAllPossibleFormulas(elementCountMap);
-
-        try {
-            // 모든 가능한 조합으로 한 번에 검색
-            List<ChemicalEntity> foundChemicals = chemicalRepository.findByMolecularFormulaIn(possibleFormulas);
-
-            if (!foundChemicals.isEmpty()) {
-                // 첫 번째 발견된 화학물질 사용
-                ChemicalEntity chemicalEntity = foundChemicals.get(0);
-                ChemicalDto chemicalDto = convertToDto(chemicalEntity);
-
-                // 어떤 화학식으로 발견되었는지 확인
-                String foundFormula = chemicalEntity.getMolecularFormula();
-
-                ChemicalSearchResponseDto responseDto = ChemicalSearchResponseDto.builder()
-                        .success(true)
-                        .message("화학 물질을 찾았습니다: " + foundFormula)
-                        .chemical(chemicalDto)
-                        .originalInput(input)
-                        .convertedFormula(foundFormula)
-                        .build();
-
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK, "화학 물질 검색 성공", responseDto));
-            } else {
-                // 표준 화학식 (알파벳 순서로 정렬)
-                String standardFormula = convertToMolecularFormula(elementCountMap);
-
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.NOT_FOUND,
-                        "해당 원소 조합으로 화학 물질을 찾을 수 없습니다: " + standardFormula, null));
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ResponseDto.response(HttpStatus.INTERNAL_SERVER_ERROR,
-                            "화학 물질 검색 실패: " + e.getMessage(), null));
+                            "화학 물질 검색 실패: " + e.getMessage(), false));
         }
     }
 
