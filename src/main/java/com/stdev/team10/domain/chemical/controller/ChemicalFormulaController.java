@@ -20,7 +20,7 @@ public class ChemicalFormulaController {
      * @return 검색 결과
      */
     @Tag(name = "화학식 검색하는 API", description = "사용자 닉네임 있어야함")
-    @PostMapping("/formula/search/{userName}")
+    @PostMapping("/formula/search")
     public ResponseEntity<?> searchChemicalByFormula(
             @RequestBody ChemicalFormulaDto formulaDto) {
         return chemicalFormulaService.searchChemicalByFormula(formulaDto);
