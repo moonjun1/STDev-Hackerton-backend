@@ -30,4 +30,7 @@ public class ChemicalEntity {
     // "초등", "중등", "고등", "기타" 값 가질수 있음
     @Column(length = 100)
     private String educationLevel;
+
+    @Column
+    private Long power;
 }

@@ -1,6 +1,5 @@
 package com.stdev.team10.domain.chemical.controller;
 
-import com.stdev.team10.domain.chemical.service.ChemicalService;
 import com.stdev.team10.domain.chemical.service.UserChemicalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -15,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/chemical")
 @Tag(name = "화학물질 api입니다", description = "화학물질 관련 api입니다.")
 public class ChemicalController {
-
-    @Autowired
-    private ChemicalService chemicalService;
 
     @Autowired
     private UserChemicalService userChemicalService;
