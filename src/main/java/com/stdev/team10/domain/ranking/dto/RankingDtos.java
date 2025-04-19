@@ -17,7 +17,7 @@ public class RankingDtos {
         private int rank;
         private Long userId;
         private String username;
-        private String organization;
+        private String groupName;
         private long successCount;
     }
 
@@ -27,7 +27,7 @@ public class RankingDtos {
     @AllArgsConstructor
     public static class OrganizationRankingDto {
         private int rank;
-        private String organization;
+        private String groupName;
         private long successCount;
     }
 

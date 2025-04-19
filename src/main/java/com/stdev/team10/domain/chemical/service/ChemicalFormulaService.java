@@ -91,10 +91,15 @@ public class ChemicalFormulaService {
                         .originalInput(input)
                         .convertedFormula(foundFormula)
                         .build();
+                if(alreadySuccessful) {
+                    responseDto.setSuccess(false);
+                    return ResponseEntity.ok().body(ResponseDto
+                            .response(HttpStatus.OK, "이미 검색한 화학식입니다", responseDto));
+                } else {
+                    return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK,
+                            "화학 물질 검색 성공", responseDto));
+                }
 
-                return ResponseEntity.ok().body(ResponseDto.response(HttpStatus.OK,
-                        alreadySuccessful ? "화학 물질 검색 성공 (이미 검색한 화학식입니다)" : "화학 물질 검색 성공",
-                        responseDto));
             } else {
                 // 표준 화학식 (알파벳 순서로 정렬)
                 String standardFormula = convertToMolecularFormula(elementCountMap);
