@@ -61,7 +61,7 @@ public class RankingService {
                     .rank(rank++)
                     .userId(user.getUserId())
                     .username(user.getUserName())
-                    .organization(user.getGroupName())
+                    .groupName(user.getGroupName())
                     .successCount(count) // 중복 제외된 성공 카운트
                     .build();
 
@@ -91,7 +91,7 @@ public class RankingService {
             if (organization != null && !organization.isEmpty()) {
                 RankingDtos.OrganizationRankingDto rankingDto = RankingDtos.OrganizationRankingDto.builder()
                         .rank(rank++)
-                        .organization(organization)
+                        .groupName(organization)
                         .successCount(count) // 중복 제외된 성공 카운트
                         .build();
 

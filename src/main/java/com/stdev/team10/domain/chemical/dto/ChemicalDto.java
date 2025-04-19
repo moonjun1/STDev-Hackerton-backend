@@ -21,6 +21,7 @@ public class ChemicalDto {
 
     private Integer attackPower;
 
+
     public ChemicalEntity toEntity() {
         return ChemicalEntity.builder()
                 .chemicalId(this.chemicalId)
