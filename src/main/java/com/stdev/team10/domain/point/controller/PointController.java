@@ -28,7 +28,7 @@ public class PointController {
         return pointService.searchUserPoint(userName);
     }
 
-    @Operation(summary = "원소 구매 api 입니다", description = "구매하는 유저의 ip 값과 구매할 원소를 전달합니다.")
+    @Operation(summary = "원소 구매 api 입니다", description = "구매하는 유저의 id 값과 구매할 원소를 포함하여 전달하면 구매 내역에 저장됩니다. (포인트 차감은 /point api를 호출해주세요)")
     @PostMapping("/element/add")
     public ResponseEntity<?> buyElement(@RequestBody PointUserElementStatusDto pointUserElementStatusDto) {
         return pointService.addElement(pointUserElementStatusDto);
