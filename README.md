@@ -1,2 +1,2 @@
 
-[Uploading ATOMIX_10팀.pdf…]()
+[ATOMIX_10팀 PDF 문서](ATOMIX_10팀.pdf)
