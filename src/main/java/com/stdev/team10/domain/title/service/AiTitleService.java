@@ -56,7 +56,7 @@ public class AiTitleService {
         headers.set("Authorization", "Bearer " + apiKey);
 
         Map<String, Object> requestBody = Map.of(
-                "model", "gpt-4",
+                "model", "gpt-4o-mini",
                 "messages", List.of(
                         Map.of("role", "system", "content", "당신은 화학 전문가로, 사용자의 화학물질 발견 기록을 분석하여 창의적이고 의미 있는 칭호를 생성합니다."),
                         Map.of("role", "user", "content", prompt)
