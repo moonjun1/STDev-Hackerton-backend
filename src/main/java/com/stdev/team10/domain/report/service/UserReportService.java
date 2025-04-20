@@ -189,7 +189,7 @@ public class UserReportService {
         headers.set("Authorization", "Bearer " + apiKey);
 
         Map<String, Object> requestBody = Map.of(
-                "model", "gpt-4",
+                "model", "gpt-4o-mini",
                 "messages", List.of(
                         Map.of("role", "system", "content", "당신은 화학 교육 전문가로, 사용자의 화학물질 발견 기록을 분석하여 객관적이고 교육적인 보고서를 작성합니다. 응답은 반드시 마크다운 형식으로 작성하며, 보고서 형태를 유지합니다."),
                         Map.of("role", "user", "content", prompt)
