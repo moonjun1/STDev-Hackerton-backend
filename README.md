@@ -91,14 +91,28 @@
 
 <div align="center">
   
-| 분류 | 기술 |
-|------|------|
-| **언어** | ![Java](https://img.shields.io/badge/Java-17-orange.svg) |
-| **프레임워크** | ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.7-green.svg) |
-| **데이터베이스** | ![JPA](https://img.shields.io/badge/JPA-Hibernate-brown.svg) |
-| **외부 API** | ![OpenAI API](https://img.shields.io/badge/OpenAI-API-blue.svg) |
-| **문서화** | ![Swagger UI](https://img.shields.io/badge/Swagger-UI-85EA2D.svg) |
-  
+## 기술 스택
+
+### 백엔드
+- ![Java](https://img.shields.io/badge/Java-17-orange)
+- ![Spring Boot](https://img.shields.io/badge/Spring_Boot-2.7.0-green)
+- ![JPA](https://img.shields.io/badge/JPA-Hibernate-brightgreen)
+- ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue)
+
+### 인프라
+- ![AWS](https://img.shields.io/badge/AWS-EC2-orange)
+
+### 개발 도구
+- ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ_IDEA-2024.1-purple)
+- ![Postman](https://img.shields.io/badge/Postman-API_Testing-orange)
+
+### 협업 툴
+- ![Git](https://img.shields.io/badge/Git-2.36-red)
+- ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=flat&logo=figma&logoColor=white)
+
+### 문서화
+- ![Swagger](https://img.shields.io/badge/Swagger-API_Docs-green)
+
 </div>
 
 ## 📊 모델 구조
